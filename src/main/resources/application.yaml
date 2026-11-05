@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: onlinechat
+
+  datasource:
+    url: jdbc:sqlite:chat.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
