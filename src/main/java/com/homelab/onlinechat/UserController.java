@@ -12,23 +12,26 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
-        Optional<User> checkExistingUser = userRepository.findByUserId(user.getUserId());
+    public String register(@RequestBody UserDTO userDto) {
+        Optional<User> checkExistingUser = userRepository.findByUserId(userDto.getUserId());
         if (checkExistingUser.isPresent()) {
             return "Registration Failed: User already exist";
         }
 
+        User newUser = new User();
+        newUser.setUserId(userDto.getUserId());
+        newUser.setPassword(userDto.getPassword());
 
-        userRepository.save(user);
-        return "Registration success, your userID is：" + user.getUserId();
+        userRepository.save(newUser);
+        return "Registration success, your userID is：" + newUser.getUserId();
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        Optional<User> checkLoginUser = userRepository.findByUserId(user.getUserId());
+    public String login(@RequestBody UserDTO userDto) {
+        Optional<User> checkLoginUser = userRepository.findByUserId(userDto.getUserId());
         if (checkLoginUser.isPresent()) {
-           if (checkLoginUser.get().getPassword().equals(user.getPassword())){
-               return "Login success, welcome back: " + user.getUserId();
+           if (checkLoginUser.get().getPassword().equals(userDto.getPassword())){
+               return "Login success, welcome back: " + userDto.getUserId();
            } else {
                return "Wrong password, try again";
            }
