@@ -1,6 +1,7 @@
 package com.homelab.onlinechat;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,17 +44,10 @@ public class MessageController {
 }
 
 
-// @Getter add back after finish this part of code
+@Getter
 class MessageInput {
     private String senderId;
     private String receiverId;
     private String content;
 
-
-    public String getSenderId() { return senderId; }
-    public void setSenderId(String senderId) { this.senderId = senderId; }
-    public String getReceiverId() { return receiverId; }
-    public void setReceiverId(String receiverId) { this.receiverId = receiverId; }
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
 }
